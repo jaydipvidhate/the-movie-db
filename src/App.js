@@ -7,6 +7,7 @@ import { baseURL, API_KEY } from "./utilities";
 import axios from "axios";
 import MoviesByGenres from "./component/homeComponents/MoviesByGenres";
 import MovieDetails from "./component/homeComponents/MovieDetails";
+import Footer from "./component/Footer";
 
 function App() {
   const [genresOpen, setGenresOpen] = useState(false);
@@ -14,6 +15,10 @@ function App() {
   const [genresId, setGenresId] = useState(1);
   const [moviesByGenre, setMoviesByGenre] = useState([]);
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    document.title = "TMDB";
+  }, []);
 
   useEffect(() => {
     getGenresData();
@@ -59,6 +64,7 @@ function App() {
           element={<MoviesByGenres movies={moviesByGenre && moviesByGenre} />}
         />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

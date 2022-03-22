@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
 import { CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 import { POSTER_URL } from "../../utilities";
 
 export default function MovieCard({ movie }) {
+  const card = useRef();
+
+  const cardHover = () => {
+    card.current.style.boxShadow = "0 0 10px 0 #00000020";
+  };
+  const cardHoverOut = () => {
+    card.current.style.boxShadow = "none";
+  };
+
   const {
     id,
     original_title,
@@ -17,7 +26,7 @@ export default function MovieCard({ movie }) {
       key={id}
       to={`/movies/${id}`}
       style={{
-        padding: "0 10px",
+        padding: "14px",
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
@@ -27,13 +36,19 @@ export default function MovieCard({ movie }) {
         margin: "18px 0",
         textDecoration: "none",
         color: "#000000",
+        transition: "all 0.3s ease",
+        borderRadius: 10,
       }}
+      onMouseOver={cardHover}
+      onMouseOut={cardHoverOut}
+      onClick={() => window.scrollTo(0, 0)}
+      ref={card}
     >
       <div style={{ position: "relative", marginBottom: 20 }}>
         <img
           src={`${POSTER_URL}${poster_path}`}
           style={{
-            width: 160,
+            width: 180,
             height: 240,
             borderRadius: 10,
             boxShadow: "0 0 10px -2px #00000080",
@@ -71,7 +86,7 @@ export default function MovieCard({ movie }) {
               fontWeight: "bolder",
             }}
           >
-            {vote_average * 10}
+            {Math.trunc(vote_average * 10)}
             <span
               style={{
                 fontSize: 6,
@@ -88,7 +103,8 @@ export default function MovieCard({ movie }) {
           fontWeight: "bold",
           marginBottom: 6,
           maxWidth: 140,
-          maxHeight: 40,
+          maxHeight: 34,
+          overflow: "hidden",
         }}
       >
         {original_title}

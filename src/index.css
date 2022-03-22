@@ -14,6 +14,7 @@ code {
 
 ::-webkit-scrollbar {
   height: 8px;
+  width: 10px;
 }
 
 /* Track */
@@ -26,4 +27,8 @@ code {
 ::-webkit-scrollbar-thumb {
   background: rgb(205, 205, 205);
   border-radius: 10px;
+}
+
+html {
+  scroll-behavior: smooth;
 }
