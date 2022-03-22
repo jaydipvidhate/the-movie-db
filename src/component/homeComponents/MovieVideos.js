@@ -24,18 +24,17 @@ export default function MovieVideos({ video, first }) {
           src={`https://img.youtube.com/vi/${key}/0.jpg`}
           alt=""
         />
-        {first && (
-          <div
-            style={{
-              backgroundColor: "#00000080",
-              padding: 20,
-              borderRadius: "50%",
-              position: "absolute",
-            }}
-          >
-            <FaPlay style={{ color: "#ffffff", fontSize: 20 }} />
-          </div>
-        )}
+        <div
+          style={{
+            backgroundColor: "#00000080",
+            padding: 20,
+            borderRadius: "50%",
+            position: "absolute",
+            opacity: first ? 1 : 0.6,
+          }}
+        >
+          <FaPlay style={{ color: "#ffffff", fontSize: 20 }} />
+        </div>
       </div>
       {videoOpen && <VideoPlayer setVideoOpen={setVideoOpen} url={key} />}
     </>

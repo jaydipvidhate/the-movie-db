@@ -26,6 +26,7 @@ export default function MovieDetails() {
   const [videoOpen, setVideoOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [trailerKey, setTrailerKey] = useState("");
+  const [providers, setProviders] = useState([]);
 
   useEffect(() => {
     document.title =
@@ -36,9 +37,13 @@ export default function MovieDetails() {
       ")";
   }, [movieDetails]);
   useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+  useEffect(() => {
     getMovieDetailsFromDB();
     getMovieCreditsFromDB();
     getRecommendationsFromDB();
+    // getWatchProvidersFromDB();
   }, [id]);
 
   useEffect(() => {
@@ -90,6 +95,16 @@ export default function MovieDetails() {
       });
     setLoading(false);
   };
+
+  // const getWatchProvidersFromDB = async () => {
+  //   setLoading(true);
+  //   const provider = await axios
+  //     .get(`${baseURL}/movie/${id}/watch/providers?api_key=${API_KEY}`)
+  //     .then((provider) => setProviders(provider))
+  //     .catch((err) => console.log(err));
+  //   setLoading(false);
+  // };
+  // console.log(providers);
 
   const {
     adult,
@@ -558,12 +573,8 @@ export default function MovieDetails() {
             {movieVideos &&
               movieVideos.map((video, index) => {
                 return (
-                  <div style={{ width: 400, marginRight: 20 }}>
-                    <MovieVideos
-                      video={video}
-                      key={video.id}
-                      first={index == 0 && true}
-                    />
+                  <div key={video.id} style={{ width: 400, marginRight: 20 }}>
+                    <MovieVideos video={video} first={index == 0 && true} />
                   </div>
                 );
               })}

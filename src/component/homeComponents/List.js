@@ -9,13 +9,13 @@ export default function List({ list, setPage, page, loading }) {
     <div
       style={{
         width: "100%",
-        margin: "20px 0",
+        marginBottom: 20,
         position: "relative",
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <div
+      {/* <div
         style={{ display: "flex", justifyContent: "space-between", margin: 18 }}
       >
         <button
@@ -40,14 +40,14 @@ export default function List({ list, setPage, page, loading }) {
         >
           next
         </button>
-      </div>
+      </div> */}
       <div
         style={{
           display: "flex",
           alignItems: "flex-start",
           overflowX: "scroll",
           overflowY: "hidden",
-          padding: "10px 16px",
+          padding: "20px 16px",
           paddingBottom: 30,
         }}
       >
@@ -109,7 +109,12 @@ export default function List({ list, setPage, page, loading }) {
                         sx={{
                           backgroundColor: "black",
                           borderRadius: "50%",
-                          color: "yellow",
+                          color:
+                            vote_average * 10 > 70
+                              ? "#00dd00"
+                              : vote_average * 10 < 30
+                              ? "#aa0000"
+                              : "yellow",
                           padding: 0.4,
                         }}
                         size={36}

@@ -10,7 +10,9 @@ export default function MoviesByGenres({ movies }) {
   return (
     <PageContainer>
       <HomeWelcome
-        // welcomeImg={`${POSTER_URL}${movies.results[0].poster_path}`}
+        welcomeImg={`${POSTER_URL}${
+          movies.results[0] && movies.results[0].poster_path
+        }`}
         title={name}
         subTitle={`Best movies in ${name} genres`}
       />
