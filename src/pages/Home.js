@@ -70,7 +70,7 @@ export const Home = () => {
         <HomeWelcome
           welcomeImg={`${POSTER_URL}${
             popularMovies[0]
-              ? popularMovies[0].poster_path
+              ? popularMovies[0].backdrop_path
               : require("../db/tenet.png")
           }`}
           title="Welcome"

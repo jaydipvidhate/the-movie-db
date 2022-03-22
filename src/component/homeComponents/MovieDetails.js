@@ -37,13 +37,12 @@ export default function MovieDetails() {
       ")";
   }, [movieDetails]);
   useEffect(() => {
-    window.scroll(0, 0);
+    window.scrollTo(0, 0);
   }, []);
   useEffect(() => {
     getMovieDetailsFromDB();
     getMovieCreditsFromDB();
     getRecommendationsFromDB();
-    // getWatchProvidersFromDB();
   }, [id]);
 
   useEffect(() => {
@@ -96,16 +95,6 @@ export default function MovieDetails() {
     setLoading(false);
   };
 
-  // const getWatchProvidersFromDB = async () => {
-  //   setLoading(true);
-  //   const provider = await axios
-  //     .get(`${baseURL}/movie/${id}/watch/providers?api_key=${API_KEY}`)
-  //     .then((provider) => setProviders(provider))
-  //     .catch((err) => console.log(err));
-  //   setLoading(false);
-  // };
-  // console.log(providers);
-
   const {
     adult,
     backdrop_path,
@@ -146,11 +135,7 @@ export default function MovieDetails() {
       {loading ? (
         <div
           style={{
-            backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.8),  rgba(0,0,0,0.4)),url(${
-              POSTER_URL + poster_path
-            })`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
+            backgroundColor: "#00000010",
             padding: "20px 0",
             height: 600,
           }}
@@ -159,7 +144,7 @@ export default function MovieDetails() {
         <div
           style={{
             backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.8),  rgba(0,0,0,0.4)),url(${
-              POSTER_URL + poster_path
+              POSTER_URL + backdrop_path
             })`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -185,6 +170,7 @@ export default function MovieDetails() {
               <img
                 style={{
                   height: 600,
+                  borderRadius: 10,
                 }}
                 src={POSTER_URL + poster_path}
                 alt=""
@@ -244,7 +230,12 @@ export default function MovieDetails() {
                     sx={{
                       backgroundColor: "black",
                       borderRadius: "50%",
-                      color: "yellow",
+                      color:
+                        vote_average * 10 > 70
+                          ? "#00dd00"
+                          : vote_average * 10 < 30
+                          ? "#aa0000"
+                          : "yellow",
                       padding: 0.4,
                     }}
                     size={60}

@@ -59,6 +59,7 @@ function App() {
           <Route path=":id" element={<MovieDetails />} />
         </Route>
         <Route path="/tvShows" element={<Home />} />
+        <Route path="/people" element={<Home />} />
         <Route
           path="/genres/:name"
           element={<MoviesByGenres movies={moviesByGenre && moviesByGenre} />}

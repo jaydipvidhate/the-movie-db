@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 import { POSTER_URL } from "../../utilities";
+import { MdMovie } from "react-icons/md";
 
 export default function MovieCard({ movie }) {
   const card = useRef();
@@ -45,16 +46,40 @@ export default function MovieCard({ movie }) {
       ref={card}
     >
       <div style={{ position: "relative", marginBottom: 20 }}>
-        <img
-          src={`${POSTER_URL}${poster_path}`}
-          style={{
-            width: 180,
-            height: 240,
-            borderRadius: 10,
-            boxShadow: "0 0 10px -2px #00000080",
-          }}
-          alt=""
-        />
+        {poster_path ? (
+          <img
+            src={`${POSTER_URL}${poster_path}`}
+            style={{
+              width: 180,
+              height: 240,
+              borderRadius: 10,
+              boxShadow: "0 0 10px -2px #00000080",
+            }}
+            alt=""
+          />
+        ) : (
+          <div
+            style={{
+              width: 180,
+              height: 240,
+              borderRadius: 10,
+              boxShadow: "0 0 10px -2px #00000080",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#00000020",
+            }}
+          >
+            <MdMovie
+              style={{
+                width: "50%",
+                height: "50%",
+                color: "#000000",
+                opacity: 0.6,
+              }}
+            />
+          </div>
+        )}
 
         <div
           style={{

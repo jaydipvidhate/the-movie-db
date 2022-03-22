@@ -9,9 +9,6 @@ import { API_KEY, baseURL } from "../../utilities";
 
 const Header = ({ genres, handleOnPress }) => {
   const [genresOpen, setGenresOpen] = useState(false);
-  const [discoverMovies, setDiscoverMovies] = useState([]);
-  const [genresId, setGenresId] = useState(1);
-  const [page, setPage] = useState(1);
 
   return (
     <div
@@ -43,7 +40,7 @@ const Header = ({ genres, handleOnPress }) => {
             TMDB
           </Link>
           <Link
-            to="/movies"
+            to="/"
             style={{
               padding: "10px 0",
             }}
@@ -60,14 +57,15 @@ const Header = ({ genres, handleOnPress }) => {
           >
             TV Shows
           </Link>
-          <h2
+          <Link
+            to="/people"
             style={{
               padding: "10px 0",
             }}
             className="navLink"
           >
             People
-          </h2>
+          </Link>
           <div
             style={{
               position: "relative",
