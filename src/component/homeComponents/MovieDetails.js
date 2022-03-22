@@ -5,8 +5,16 @@ import { API_KEY, baseURL, POSTER_URL } from "../../utilities";
 import PageContainer from "../PageContainer";
 import MovieCard from "./MovieCard";
 import { CircularProgress } from "@mui/material";
-import { FaThList, FaHeart, FaBookmark, FaStar, FaPlay } from "react-icons/fa";
+import {
+  FaThList,
+  FaHeart,
+  FaBookmark,
+  FaStar,
+  FaPlay,
+  FaUser,
+} from "react-icons/fa";
 import VideoPlayer from "../VideoPlayer";
+import MovieVideos from "./MovieVideos";
 
 export default function MovieDetails() {
   const id = useParams().id;
@@ -20,7 +28,12 @@ export default function MovieDetails() {
   const [trailerKey, setTrailerKey] = useState("");
 
   useEffect(() => {
-    document.title = movieDetails.original_title;
+    document.title =
+      movieDetails.original_title +
+      " " +
+      "(" +
+      String(movieDetails.release_date).slice(0, 4) +
+      ")";
   }, [movieDetails]);
   useEffect(() => {
     getMovieDetailsFromDB();
@@ -375,7 +388,7 @@ export default function MovieDetails() {
             >
               {credits.cast
                 ? credits.cast.length >= 8
-                  ? credits.cast.map((data) => {
+                  ? credits.cast.slice(0, 10).map((data) => {
                       const {
                         id,
                         cast_id,
@@ -400,11 +413,22 @@ export default function MovieDetails() {
                             paddingBottom: 8,
                           }}
                         >
-                          <img
-                            src={POSTER_URL + profile_path}
-                            style={{ width: 160, height: 180 }}
-                            alt=""
-                          />
+                          {profile_path ? (
+                            <img
+                              src={POSTER_URL + profile_path}
+                              style={{ width: 160, height: 180 }}
+                              alt="Profile"
+                            />
+                          ) : (
+                            <FaUser
+                              style={{
+                                width: 140,
+                                height: 160,
+                                padding: 20,
+                                opacity: 0.4,
+                              }}
+                            />
+                          )}
                           <h4
                             style={{
                               margin: "10px 0",
@@ -455,11 +479,22 @@ export default function MovieDetails() {
                             paddingBottom: 8,
                           }}
                         >
-                          <img
-                            src={POSTER_URL + profile_path}
-                            style={{ width: 160, height: 180 }}
-                            alt=""
-                          />
+                          {profile_path ? (
+                            <img
+                              src={POSTER_URL + profile_path}
+                              style={{ width: 160, height: 180 }}
+                              alt="Profile"
+                            />
+                          ) : (
+                            <FaUser
+                              style={{
+                                width: 140,
+                                height: 160,
+                                padding: 20,
+                                opacity: 0.4,
+                              }}
+                            />
+                          )}
                           <h4
                             style={{
                               margin: "10px 0",
@@ -508,14 +543,27 @@ export default function MovieDetails() {
               marginBottom: 10,
             }}
           >
-            Trailer
+            Media
           </h2>
-          <div>
+          <div
+            style={{
+              display: "flex",
+              padding: "20px 0",
+              width: "100%",
+              overflowX: "scroll",
+              position: "relative",
+              overflowY: "hidden",
+            }}
+          >
             {movieVideos &&
-              movieVideos.map((video) => {
+              movieVideos.map((video, index) => {
                 return (
-                  <div key={video.id}>
-                    <h2>{video.name}</h2>
+                  <div style={{ width: 400, marginRight: 20 }}>
+                    <MovieVideos
+                      video={video}
+                      key={video.id}
+                      first={index == 0 && true}
+                    />
                   </div>
                 );
               })}
