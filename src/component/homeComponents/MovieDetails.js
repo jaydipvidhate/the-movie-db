@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { API_KEY, baseURL, POSTER_URL } from "../../utilities";
 import PageContainer from "../PageContainer";
 import MovieCard from "./MovieCard";
@@ -409,7 +409,8 @@ export default function MovieDetails() {
                       } = data;
 
                       return (
-                        <div
+                        <Link
+                          to={`/person/${id}`}
                           key={id}
                           style={{
                             display: "flex",
@@ -417,12 +418,16 @@ export default function MovieDetails() {
                             margin: "0 10px",
                             boxShadow: "0 0 10px 0 #00000020",
                             paddingBottom: 8,
+                            textDecoration: "none",
                           }}
                         >
                           {profile_path ? (
                             <img
                               src={POSTER_URL + profile_path}
-                              style={{ width: 160, height: 180 }}
+                              style={{
+                                width: 160,
+                                height: 180,
+                              }}
                               alt="Profile"
                             />
                           ) : (
@@ -458,7 +463,7 @@ export default function MovieDetails() {
                           >
                             {character}
                           </p>
-                        </div>
+                        </Link>
                       );
                     })
                   : credits.cast.map((data) => {

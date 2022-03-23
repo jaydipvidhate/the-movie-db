@@ -8,6 +8,7 @@ import axios from "axios";
 import MoviesByGenres from "./component/homeComponents/MoviesByGenres";
 import MovieDetails from "./component/homeComponents/MovieDetails";
 import Footer from "./component/Footer";
+import { ActorsDetails } from "./component/homeComponents/ActorsDetails";
 
 function App() {
   const [genresOpen, setGenresOpen] = useState(false);
@@ -31,8 +32,8 @@ function App() {
   const getGenresData = async () => {
     let genre = await axios
       .get(`${baseURL}/genre/movie/list?api_key=${API_KEY}`)
-      .then((genre) => setGenre(genre.data.genres))
-      .catch((err) => console.log(err));
+      .then((genre) => setGenre(genre.data.genres));
+    // .catch((err) => console.log(err));
   };
 
   const getMoviesByGenresId = async () => {
@@ -40,8 +41,8 @@ function App() {
       .get(
         `${baseURL}/discover/movie?api_key=${API_KEY}&with_genres=${genresId}&page=${page}&sort_by=popularity.desc`
       )
-      .then((movies) => setMoviesByGenre(movies.data))
-      .catch((err) => console.log(err));
+      .then((movies) => setMoviesByGenre(movies.data));
+    // .catch((err) => console.log(err));
 
     // console.log(moviesByGenre);
   };
@@ -55,8 +56,11 @@ function App() {
       <Header handleOnPress={handleOnPress} genres={genres} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/movies" element={<MovieDetails />}>
+        <Route path="/movies">
           <Route path=":id" element={<MovieDetails />} />
+        </Route>
+        <Route path="/person">
+          <Route path=":id" element={<ActorsDetails />} />
         </Route>
         <Route path="/tvShows" element={<Home />} />
         <Route path="/people" element={<Home />} />

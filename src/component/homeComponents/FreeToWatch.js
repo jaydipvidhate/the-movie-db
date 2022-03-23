@@ -18,8 +18,8 @@ export default function FreeToWatch() {
       .get(`${baseURL}/movie/free?api_key=${API_KEY}&page=${page}`)
       .then((movies) => {
         setFreeMovies(movies.data.results);
-      })
-      .catch((err) => console.log(err));
+      });
+    // .catch((err) => console.log(err));
 
     setLoading(false);
   };

@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { API_KEY, baseURL } from "../../utilities";
 import PageContainer from "../PageContainer";
 import MovieCard from "./MovieCard";
@@ -10,12 +10,12 @@ export default function HomeWelcome({ welcomeImg, title, subTitle }) {
   const [movieSearched, setMovieSearched] = useState([]);
 
   useEffect(() => {
-    SearchMovie();
+    SearchMovie(searchMovie);
   }, [searchMovie]);
 
-  const SearchMovie = async () => {
+  const SearchMovie = async (searchMovie) => {
     if (searchMovie !== "") {
-      const searchedMovies = await axios
+      await axios
         .get(`${baseURL}/search/movie?api_key=${API_KEY}&query=${searchMovie}`)
         .then((movie) => setMovieSearched(movie.data.results));
       // .catch((err) =>
@@ -122,7 +122,7 @@ export default function HomeWelcome({ welcomeImg, title, subTitle }) {
             >
               Search Results
             </h2>
-            {movieSearched.length != 0 ? (
+            {movieSearched.length !== 0 ? (
               <div style={{ display: "flex", overflowX: "scroll" }}>
                 {movieSearched
                   ? movieSearched.map((movie) => {

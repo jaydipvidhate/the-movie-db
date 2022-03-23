@@ -37,8 +37,8 @@ export const Home = () => {
       .get(`${baseURL}/movie/popular?api_key=${API_KEY}&page=${page}`)
       .then((movies) => {
         setPopularMovies(movies.data.results);
-      })
-      .catch((err) => console.log(err));
+      });
+    // .catch((err) => console.log(err));
 
     setLoading(false);
   };
@@ -47,8 +47,8 @@ export const Home = () => {
     setLoading(true);
     let trending = await axios
       .get(`${baseURL}/trending/all/${trendingType}?api_key=${API_KEY}`)
-      .then((trending) => setTrendingMovies(trending.data.results))
-      .catch((err) => console.log(err));
+      .then((trending) => setTrendingMovies(trending.data.results));
+    // .catch((err) => console.log(err));
 
     setLoading(false);
   };
@@ -58,8 +58,8 @@ export const Home = () => {
     setLoading(true);
     const trailers = await axios
       .get(`${baseURL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`)
-      .then((trailers) => setTrailers(trailers.data.results))
-      .catch((err) => console.log(err));
+      .then((trailers) => setTrailers(trailers.data.results));
+    // .catch((err) => console.log(err));
 
     setLoading(false);
   };
