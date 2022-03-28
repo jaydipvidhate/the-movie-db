@@ -49,6 +49,7 @@ const LatestTrailers = ({
           display: "flex",
           overflowX: "scroll",
           overflowY: "hidden",
+          marginBottom: 10,
         }}
       >
         {trailers &&
@@ -61,18 +62,23 @@ const LatestTrailers = ({
                   onMouseOut={() => onHoverOut()}
                   ref={posterCard}
                   style={{
-                    backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.2),  rgba(0,0,0,0.2)),url(${POSTER_URL}${
-                      poster_path ? poster_path : null
-                    })`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    padding: 100,
+                    // backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.2),  rgba(0,0,0,0.2)),url()`,
+                    // backgroundRepeat: "no-repeat",
+                    // backgroundSize: "cover",
                     margin: "20px 10px",
-                    width: 200,
+                    width: 400,
+                    height: 200,
                     borderRadius: 10,
                     transform: "scale(1)",
+                    overflow: "hidden",
                   }}
-                ></div>
+                >
+                  <img
+                    src={`${POSTER_URL + poster_path}`}
+                    alt=""
+                    style={{ width: "100%" }}
+                  />
+                </div>
               </div>
             );
           })}

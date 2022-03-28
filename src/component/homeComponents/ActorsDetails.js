@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { API_KEY, baseURL, POSTER_URL } from "../../utilities";
@@ -12,6 +12,8 @@ export const ActorsDetails = () => {
   const [actorMovies, setActorMovies] = useState([]);
   const [page, setPage] = useState(1);
 
+  const profile = useRef();
+
   const {
     also_known_as,
     biography,
@@ -23,6 +25,10 @@ export const ActorsDetails = () => {
     place_of_birth,
     profile_path,
   } = actor;
+
+  useEffect(() => {
+    document.title = name ? name : "TMDB";
+  }, [name]);
 
   useEffect(() => {
     getActorsDetailsFromDB();
@@ -42,6 +48,13 @@ export const ActorsDetails = () => {
       )
       .then((movie) => setActorMovies(movie.data.results))
       .catch((err) => console.log(err));
+  };
+
+  const onImageHover = () => {
+    profile.current.style.transform = "scale(1.1)";
+  };
+  const outImageHover = () => {
+    profile.current.style.transform = "scale(1)";
   };
 
   const PersonalInfoCard = ({ title, content }) => {
@@ -86,6 +99,8 @@ export const ActorsDetails = () => {
       >
         {profile_path ? (
           <div
+            onMouseOver={onImageHover}
+            onMouseOut={outImageHover}
             style={{
               width: "100%",
               borderRadius: 10,
@@ -94,9 +109,10 @@ export const ActorsDetails = () => {
             }}
           >
             <img
+              ref={profile}
               src={`${POSTER_URL + profile_path}`}
               alt="profile"
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: "100%", height: "100%", transition: "0.3s" }}
             />
           </div>
         ) : (

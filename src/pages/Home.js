@@ -20,6 +20,10 @@ export const Home = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    document.title = "TMDB";
+  }, []);
+
+  useEffect(() => {
     getPopularMoviesFromDB();
     getTrendingMoviesFromDB();
     getTrailersFromDB();
