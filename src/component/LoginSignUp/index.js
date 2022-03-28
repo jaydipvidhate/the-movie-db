@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
+import { connect } from "react-redux";
+import { loginUser, createUser } from "../../actions/index";
 
 const InputCard = ({ title, placeHolder, value, setValue, inputType }) => {
   return (
@@ -25,11 +27,38 @@ const InputCard = ({ title, placeHolder, value, setValue, inputType }) => {
   );
 };
 
-const LoginCard = ({ setIsLoginOpen, setIsLoginCard }) => {
+const LoginCard = ({ setIsLoginOpen, setIsLoginCard, users, loginUser }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
+  const handleOnSubmit = () => {
+    if (!userName || !password) {
+      return alert("Plz fill all details");
+    }
+    let user = {
+      name: userName,
+      password: password,
+    };
+    // console.log(users);
+
+    if (users === []) {
+      return alert("No account present plz create new");
+    }
+    if (users) {
+      const filterUser = users?.filter(
+        (data) => data.userName === userName && data.password == password
+      );
+      // console.log(filterUser);
+      if (
+        filterUser[0]?.userName == userName &&
+        filterUser[0]?.password == password
+      ) {
+        return loginUser(user), setIsLoginOpen(false);
+      } else {
+        return alert("Password not matched");
+      }
+    }
+  };
   return (
     <div
       style={{
@@ -80,6 +109,7 @@ const LoginCard = ({ setIsLoginOpen, setIsLoginCard }) => {
         />
       </div>
       <button
+        onClick={() => handleOnSubmit()}
         style={{
           padding: "10px 0",
           border: "none",
@@ -113,10 +143,33 @@ const LoginCard = ({ setIsLoginOpen, setIsLoginCard }) => {
   );
 };
 
-const SignUpCard = ({ setIsLoginOpen, setIsLoginCard }) => {
+const SignUpCard = ({ setIsLoginOpen, setIsLoginCard, users, createUser }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSubmit = () => {
+    if (!userName || !password || !confirmPassword) {
+      return alert("Please fill all fields");
+    }
+    if (password !== confirmPassword) {
+      return alert("Password and Confirm Password not matched");
+    }
+
+    const userData = {
+      userName: userName,
+      password: password,
+    };
+
+    const filterUser = users?.filter((data) => data.userName === userName);
+    if (filterUser[0]?.userName == userName) {
+      // console.log(users);
+      return alert("Username already present");
+    }
+
+    createUser(userData);
+    // console.log(users);
+  };
 
   return (
     <div
@@ -175,6 +228,7 @@ const SignUpCard = ({ setIsLoginOpen, setIsLoginCard }) => {
         />
       </div>
       <button
+        onClick={handleSubmit}
         style={{
           padding: "10px 0",
           border: "none",
@@ -208,7 +262,13 @@ const SignUpCard = ({ setIsLoginOpen, setIsLoginCard }) => {
   );
 };
 
-export const LoginSignUp = ({ setIsLoginOpen, isLoginOpen }) => {
+const LoginSignUp = ({
+  setIsLoginOpen,
+  isLoginOpen,
+  users,
+  loginUser,
+  createUser,
+}) => {
   const [isLoginCard, setIsLoginCard] = useState(true);
   return (
     <div
@@ -236,13 +296,26 @@ export const LoginSignUp = ({ setIsLoginOpen, isLoginOpen }) => {
         <LoginCard
           setIsLoginOpen={setIsLoginOpen}
           setIsLoginCard={setIsLoginCard}
+          users={users}
+          loginUser={loginUser}
         />
       ) : (
         <SignUpCard
           setIsLoginOpen={setIsLoginOpen}
           setIsLoginCard={setIsLoginCard}
+          users={users}
+          createUser={createUser}
         />
       )}
     </div>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+    loggedInUser: state.loggedInUser,
+  };
+};
+
+export default connect(mapStateToProps, { createUser, loginUser })(LoginSignUp);

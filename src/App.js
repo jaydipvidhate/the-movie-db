@@ -9,7 +9,7 @@ import MoviesByGenres from "./component/homeComponents/MoviesByGenres";
 import MovieDetails from "./component/homeComponents/MovieDetails";
 import Footer from "./component/Footer";
 import { ActorsDetails } from "./component/homeComponents/ActorsDetails";
-import { LoginSignUp } from "./component/LoginSignUp";
+import LoginSignUp from "./component/LoginSignUp";
 
 function App() {
   const [genresOpen, setGenresOpen] = useState(false);

@@ -6,10 +6,19 @@ import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Slide from "@mui/material/Slide";
 import axios from "axios";
 import { API_KEY, baseURL } from "../../utilities";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions";
 
-const Header = ({ genres, handleOnPress, setIsLoginOpen, isLoginOpen }) => {
+const Header = ({
+  genres,
+  handleOnPress,
+  setIsLoginOpen,
+  isLoginOpen,
+  loggedInUser,
+  logoutUser,
+}) => {
   const [genresOpen, setGenresOpen] = useState(false);
-
+  // console.log(loggedInUser.name);
   return (
     <div
       style={{
@@ -126,18 +135,34 @@ const Header = ({ genres, handleOnPress, setIsLoginOpen, isLoginOpen }) => {
           </div>
         </div>
         <div>
-          <Fab
-            onClick={() => setIsLoginOpen(!isLoginOpen)}
-            size="small"
-            sx={{ pr: 6, pl: 6 }}
-            variant="extended"
-          >
-            Login
-          </Fab>
+          {loggedInUser.name ? (
+            <Fab
+              onClick={() => logoutUser()}
+              size="small"
+              sx={{ pr: 6, pl: 6 }}
+              variant="extended"
+            >
+              LogOut
+            </Fab>
+          ) : (
+            <Fab
+              onClick={() => setIsLoginOpen(!isLoginOpen)}
+              size="small"
+              sx={{ pr: 6, pl: 6 }}
+              variant="extended"
+            >
+              Login
+            </Fab>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    loggedInUser: state.loggedInUser,
+  };
+};
+export default connect(mapStateToProps, { logoutUser })(Header);
