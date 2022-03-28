@@ -7,7 +7,7 @@ import Slide from "@mui/material/Slide";
 import axios from "axios";
 import { API_KEY, baseURL } from "../../utilities";
 
-const Header = ({ genres, handleOnPress }) => {
+const Header = ({ genres, handleOnPress, setIsLoginOpen, isLoginOpen }) => {
   const [genresOpen, setGenresOpen] = useState(false);
 
   return (
@@ -126,7 +126,12 @@ const Header = ({ genres, handleOnPress }) => {
           </div>
         </div>
         <div>
-          <Fab size="small" sx={{ pr: 6, pl: 6 }} variant="extended">
+          <Fab
+            onClick={() => setIsLoginOpen(!isLoginOpen)}
+            size="small"
+            sx={{ pr: 6, pl: 6 }}
+            variant="extended"
+          >
             Login
           </Fab>
         </div>

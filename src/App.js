@@ -9,6 +9,7 @@ import MoviesByGenres from "./component/homeComponents/MoviesByGenres";
 import MovieDetails from "./component/homeComponents/MovieDetails";
 import Footer from "./component/Footer";
 import { ActorsDetails } from "./component/homeComponents/ActorsDetails";
+import { LoginSignUp } from "./component/LoginSignUp";
 
 function App() {
   const [genresOpen, setGenresOpen] = useState(false);
@@ -16,6 +17,7 @@ function App() {
   const [genresId, setGenresId] = useState(1);
   const [moviesByGenre, setMoviesByGenre] = useState([]);
   const [page, setPage] = useState(1);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   useEffect(() => {
     document.title = "TMDB";
@@ -53,7 +55,18 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header handleOnPress={handleOnPress} genres={genres} />
+      {isLoginOpen && (
+        <LoginSignUp
+          setIsLoginOpen={setIsLoginOpen}
+          isLoginOpen={isLoginOpen}
+        />
+      )}
+      <Header
+        handleOnPress={handleOnPress}
+        genres={genres}
+        setIsLoginOpen={setIsLoginOpen}
+        isLoginOpen={isLoginOpen}
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movies">
