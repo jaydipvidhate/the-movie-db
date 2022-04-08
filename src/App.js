@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { Home } from "./pages/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./component/Header";
-import { baseURL, API_KEY } from "./utilities";
 import axios from "axios";
 import MoviesByGenres from "./component/homeComponents/MoviesByGenres";
 import MovieDetails from "./component/homeComponents/MovieDetails";
@@ -33,7 +32,9 @@ function App() {
 
   const getGenresData = async () => {
     let genre = await axios
-      .get(`${baseURL}/genre/movie/list?api_key=${API_KEY}`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`
+      )
       .then((genre) => setGenre(genre.data.genres));
     // .catch((err) => console.log(err));
   };
@@ -41,7 +42,7 @@ function App() {
   const getMoviesByGenresId = async () => {
     let movies = await axios
       .get(
-        `${baseURL}/discover/movie?api_key=${API_KEY}&with_genres=${genresId}&page=${page}&sort_by=popularity.desc`
+        `${process.env.REACT_APP_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=${genresId}&page=${page}&sort_by=popularity.desc`
       )
       .then((movies) => setMoviesByGenre(movies.data));
     // .catch((err) => console.log(err));

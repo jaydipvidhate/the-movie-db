@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_KEY, baseURL, POSTER_URL } from "../../utilities/index";
 import { CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -85,7 +84,7 @@ export default function List({ list, setPage, page, loading }) {
                 >
                   <div style={{ position: "relative", marginBottom: 20 }}>
                     <img
-                      src={`${POSTER_URL}${poster_path}`}
+                      src={`${process.env.REACT_APP_POSTER_URL}${poster_path}`}
                       style={{
                         width: 160,
                         height: 240,

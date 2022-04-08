@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
-import { POSTER_URL } from "../../utilities";
 import { MdMovie } from "react-icons/md";
 
 export default function MovieCard({ movie }) {
@@ -48,7 +47,7 @@ export default function MovieCard({ movie }) {
       <div style={{ position: "relative", marginBottom: 20 }}>
         {poster_path ? (
           <img
-            src={`${POSTER_URL}${poster_path}`}
+            src={`${process.env.REACT_APP_POSTER_URL}${poster_path}`}
             style={{
               width: 180,
               height: 240,

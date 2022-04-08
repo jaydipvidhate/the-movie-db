@@ -4,7 +4,6 @@ import HomeWelcome from "../component/homeComponents/HomeWelcome";
 import PopularMovies from "../component/homeComponents/PopularMovies";
 import FreeToWatch from "../component/homeComponents/FreeToWatch";
 import axios from "axios";
-import { API_KEY, baseURL, POSTER_URL } from "../utilities";
 import TrendingMovies from "../component/homeComponents/TrendingMovies";
 import LatestTrailers from "../component/homeComponents/LatestTrailers";
 
@@ -39,7 +38,9 @@ export const Home = () => {
   const getPopularMoviesFromDB = async () => {
     setLoading(true);
     let movieData = await axios
-      .get(`${baseURL}/movie/popular?api_key=${API_KEY}&page=${page}`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
+      )
       .then((movies) => {
         setPopularMovies(movies.data.results);
       });
@@ -51,7 +52,9 @@ export const Home = () => {
   const getTrendingMoviesFromDB = async () => {
     setLoading(true);
     let trending = await axios
-      .get(`${baseURL}/trending/all/${trendingType}?api_key=${API_KEY}`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/trending/all/${trendingType}?api_key=${process.env.REACT_APP_API_KEY}`
+      )
       .then((trending) => setTrendingMovies(trending.data.results));
     // .catch((err) => console.log(err));
 
@@ -62,7 +65,9 @@ export const Home = () => {
   const getTrailersFromDB = async () => {
     setLoading(true);
     const trailers = await axios
-      .get(`${baseURL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
+      )
       .then((trailers) => setTrailers(trailers.data.results));
     // .catch((err) => console.log(err));
 
@@ -73,7 +78,7 @@ export const Home = () => {
     <>
       <PageContainer>
         <HomeWelcome
-          welcomeImg={`${POSTER_URL}${
+          welcomeImg={`${process.env.REACT_APP_POSTER_URL}${
             popularMovies[0]
               ? popularMovies[0].backdrop_path
               : require("../db/tenet.png")

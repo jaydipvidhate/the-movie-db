@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { API_KEY, baseURL, POSTER_URL } from "../../utilities";
 import PageContainer from "../PageContainer";
 import { FaUser } from "react-icons/fa";
 import MovieCard from "./MovieCard";
@@ -38,14 +37,16 @@ export const ActorsDetails = () => {
 
   const getActorsDetailsFromDB = async () => {
     const actor = await axios
-      .get(`${baseURL}/person/${id}?api_key=${API_KEY}&language=en-US`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/person/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+      )
       .then((actor) => setActor(actor.data));
   };
 
   const getPopularMovies = async () => {
     const movies = await axios
       .get(
-        `${baseURL}/discover/movie?api_key=${API_KEY}&with_cast=${id}&page=${page}&sort_by=popularity.desc`
+        `${process.env.REACT_APP_BASE_URL}/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_cast=${id}&page=${page}&sort_by=popularity.desc`
       )
       .then((movie) => setActorMovies(movie.data.results))
       .catch((err) => console.log(err));
@@ -111,7 +112,7 @@ export const ActorsDetails = () => {
           >
             <img
               ref={profile}
-              src={`${POSTER_URL + profile_path}`}
+              src={`${process.env.REACT_APP_POSTER_URL + profile_path}`}
               alt="profile"
               style={{ width: "100%", height: "100%", transition: "0.3s" }}
             />

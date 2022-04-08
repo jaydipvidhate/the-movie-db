@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { API_KEY, baseURL, POSTER_URL } from "../../utilities";
 import PageContainer from "../PageContainer";
 import MovieCard from "./MovieCard";
 import { CircularProgress } from "@mui/material";
@@ -52,7 +51,9 @@ export default function MovieDetails() {
   const getMovieDetailsFromDB = async () => {
     setLoading(true);
     const movie = await axios
-      .get(`${baseURL}/movie/${id}?api_key=${API_KEY}`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`
+      )
       .then((movie) => setMovieDetails(movie.data))
       .catch((err) => {
         // console.log(err);
@@ -63,7 +64,9 @@ export default function MovieDetails() {
     setLoading(true);
     // console.log(id);
     const videos = await axios
-      .get(`${baseURL}/movie/${id}/videos?api_key=${API_KEY}`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}`
+      )
       .then((videos) => setMovieVideos(videos.data.results))
       .catch((err) => {
         // console.log(err);
@@ -75,7 +78,9 @@ export default function MovieDetails() {
   const getMovieCreditsFromDB = async () => {
     setLoading(true);
     const credit = await axios
-      .get(`${baseURL}/movie/${id}/credits?api_key=${API_KEY}`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}`
+      )
       .then((credit) => setCredits(credit.data))
       .catch((err) => {
         // console.log(err);
@@ -86,7 +91,7 @@ export default function MovieDetails() {
     setLoading(true);
     const recommendation = await axios
       .get(
-        `${baseURL}/movie/${id}/recommendations?api_key=${API_KEY}&page=${page}`
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
       )
       .then((recommendation) => setRecommendations(recommendation.data.results))
       .catch((err) => {
@@ -144,7 +149,7 @@ export default function MovieDetails() {
         <div
           style={{
             backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.8),  rgba(0,0,0,0.4)),url(${
-              POSTER_URL + backdrop_path
+              process.env.REACT_APP_POSTER_URL + backdrop_path
             })`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -172,7 +177,7 @@ export default function MovieDetails() {
                   height: 600,
                   borderRadius: 10,
                 }}
-                src={POSTER_URL + poster_path}
+                src={process.env.REACT_APP_POSTER_URL + poster_path}
                 alt=""
               />
             </div>
@@ -423,7 +428,9 @@ export default function MovieDetails() {
                         >
                           {profile_path ? (
                             <img
-                              src={POSTER_URL + profile_path}
+                              src={
+                                process.env.REACT_APP_POSTER_URL + profile_path
+                              }
                               style={{
                                 width: 160,
                                 height: 180,
@@ -492,7 +499,9 @@ export default function MovieDetails() {
                         >
                           {profile_path ? (
                             <img
-                              src={POSTER_URL + profile_path}
+                              src={
+                                process.env.REACT_APP_POSTER_URL + profile_path
+                              }
                               style={{ width: 160, height: 180 }}
                               alt="Profile"
                             />

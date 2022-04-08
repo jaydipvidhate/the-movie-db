@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { POSTER_URL } from "../../utilities";
 
 const LatestTrailers = ({
   loading,
@@ -25,7 +24,7 @@ const LatestTrailers = ({
       style={{
         width: "100%",
         padding: "40px 0px",
-        backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.6),  rgba(0,0,0,0.6)),url(${POSTER_URL}${bGImage})`,
+        backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.6),  rgba(0,0,0,0.6)),url(${process.env.REACT_APP_POSTER_URL}${bGImage})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         display: "flex",
@@ -76,7 +75,7 @@ const LatestTrailers = ({
                   }}
                 >
                   <img
-                    src={`${POSTER_URL + poster_path}`}
+                    src={`${process.env.REACT_APP_POSTER_URL + poster_path}`}
                     alt=""
                     style={{ width: "100%" }}
                   />

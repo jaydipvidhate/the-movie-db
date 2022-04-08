@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_KEY, baseURL } from "../../utilities/index";
 import List from "./List";
 
 export default function FreeToWatch() {
@@ -15,7 +14,9 @@ export default function FreeToWatch() {
   const getFreeMoviesFromDB = async () => {
     setLoading(true);
     let movieData = await axios
-      .get(`${baseURL}/movie/free?api_key=${API_KEY}&page=${page}`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/movie/free?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
+      )
       .then((movies) => {
         setFreeMovies(movies.data.results);
       });

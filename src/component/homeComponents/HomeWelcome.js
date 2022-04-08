@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_KEY, baseURL } from "../../utilities";
 import PageContainer from "../PageContainer";
 import MovieCard from "./MovieCard";
 import { MdOutlineError, MdOutlineSearch, MdClose } from "react-icons/md";
@@ -16,7 +15,9 @@ export default function HomeWelcome({ welcomeImg, title, subTitle }) {
   const SearchMovie = async (searchMovie) => {
     if (searchMovie !== "") {
       await axios
-        .get(`${baseURL}/search/movie?api_key=${API_KEY}&query=${searchMovie}`)
+        .get(
+          `${process.env.REACT_APP_BASE_URL}/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${searchMovie}`
+        )
         .then((movie) => setMovieSearched(movie.data.results));
       // .catch((err) =>
       // console.log(err)
