@@ -16,9 +16,9 @@ const Header = ({
   const [genresOpen, setGenresOpen] = useState(false);
   // console.log(loggedInUser.name);
   const user = useSelector((data) => data.loggedInUser);
-  console.log("====================================");
-  console.log(user);
-  console.log("====================================");
+  // console.log("====================================");
+  // console.log(user);
+  // console.log("====================================");
   return (
     <div
       style={{
