@@ -21,6 +21,7 @@ export const Home = () => {
 
   useEffect(() => {
     document.title = "TMDB";
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {

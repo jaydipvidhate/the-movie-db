@@ -24,7 +24,7 @@ const LatestTrailers = ({
     <div
       style={{
         width: "100%",
-        padding: "40px 20px",
+        padding: "40px 0px",
         backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.6),  rgba(0,0,0,0.6)),url(${POSTER_URL}${bGImage})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -40,6 +40,7 @@ const LatestTrailers = ({
           fontSize: 22,
           fontWeight: 600,
           marginRight: 30,
+          paddingLeft: 20,
         }}
       >
         Upcoming Movies
@@ -50,6 +51,7 @@ const LatestTrailers = ({
           overflowX: "scroll",
           overflowY: "hidden",
           marginBottom: 10,
+          marginLeft: 20,
         }}
       >
         {trailers &&

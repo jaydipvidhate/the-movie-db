@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import PageContainer from "./PageContainer";
 
@@ -18,16 +19,19 @@ export default function Footer() {
             justifyContent: "center",
           }}
         >
-          <h2
+          <Link
+            to="/"
             style={{
               fontSize: 60,
               fontWeight: "bolder",
               color: "#ffffff",
               marginRight: 100,
+              cursor: "pointer",
+              textDecoration: "none",
             }}
           >
             TMDB
-          </h2>
+          </Link>
           <div style={{ color: "#ffffff", marginRight: 40 }}>
             <h4 style={{ fontWeight: 800, marginBottom: 16, fontSize: 20 }}>
               THE BASICS

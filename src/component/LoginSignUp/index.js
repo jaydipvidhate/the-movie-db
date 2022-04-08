@@ -168,6 +168,7 @@ const SignUpCard = ({ setIsLoginOpen, setIsLoginCard, users, createUser }) => {
     }
 
     createUser(userData);
+    setIsLoginCard(true);
     // console.log(users);
   };
 

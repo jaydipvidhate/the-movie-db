@@ -28,6 +28,7 @@ export const ActorsDetails = () => {
 
   useEffect(() => {
     document.title = name ? name : "TMDB";
+    window.scrollTo(0, 0);
   }, [name]);
 
   useEffect(() => {

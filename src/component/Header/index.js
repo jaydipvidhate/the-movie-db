@@ -1,13 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Fab } from "@mui/material";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
-import Slide from "@mui/material/Slide";
-import axios from "axios";
-import { API_KEY, baseURL } from "../../utilities";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions";
+import { useSelector } from "react-redux";
 
 const Header = ({
   genres,
@@ -19,6 +15,10 @@ const Header = ({
 }) => {
   const [genresOpen, setGenresOpen] = useState(false);
   // console.log(loggedInUser.name);
+  const user = useSelector((data) => data.loggedInUser);
+  console.log("====================================");
+  console.log(user);
+  console.log("====================================");
   return (
     <div
       style={{
@@ -136,14 +136,22 @@ const Header = ({
         </div>
         <div>
           {loggedInUser.name ? (
-            <Fab
-              onClick={() => logoutUser()}
-              size="small"
-              sx={{ pr: 6, pl: 6 }}
-              variant="extended"
-            >
-              LogOut
-            </Fab>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <h4
+                style={{ color: "#ffffff", fontWeight: 500, marginRight: 10 }}
+              >
+                Welcome back{" "}
+                <span style={{ fontWeight: 800 }}>{user?.name}</span>
+              </h4>
+              <Fab
+                onClick={() => logoutUser()}
+                size="small"
+                sx={{ pr: 6, pl: 6 }}
+                variant="extended"
+              >
+                LogOut
+              </Fab>
+            </div>
           ) : (
             <Fab
               onClick={() => setIsLoginOpen(!isLoginOpen)}
