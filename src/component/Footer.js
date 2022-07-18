@@ -8,7 +8,8 @@ export default function Footer() {
       style={{
         width: "100%",
         backgroundColor: "rgb(3,37,65)",
-        padding: "60px 0",
+        paddingTop: 60,
+        paddingBottom: 20,
       }}
     >
       <PageContainer>
@@ -64,6 +65,28 @@ export default function Footer() {
           </div>
         </div>
       </PageContainer>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          marginTop: 20,
+        }}
+      >
+        <h1 style={{ fontSize: 12, color: "#ffffff", opacity: 0.2 }}>
+          Created with ❤️ by{" "}
+          <a
+            href="https://jaydipvidhate.netlify.app/"
+            target="_blank"
+            style={{
+              color: "#ffffff",
+              textDecoration: "none",
+            }}
+          >
+            Jaydip Vidhate
+          </a>
+        </h1>
+      </div>
     </div>
   );
 }
